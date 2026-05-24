@@ -384,13 +384,13 @@ Un desarrollador comete por error una API key de AWS, una contraseña de base de
 | Categoría                      | Cant. | Amenazas principales                                                               |
 | ------------------------------ | ----- | ---------------------------------------------------------------------------------- |
 | **S — Spoofing**               | 8     | TH01, TH08, TH09, TH13, TH14, TH15, TH31, (implícito TH33)                         |
-| **T — Tampering**              | 13    | TH02, TH04, TH07, TH16, TH17, TH19, TH22, TH24, TH29, TH32, TH34, TH35, TH38, TH40 |
-| **R — Repudiation**            | 3     | TH18, TH21, TH40                                                                   |
-| **I — Information Disclosure** | 8     | TH03, TH11, TH15, TH20, TH23, TH25, TH26, TH28, TH39                               |
+| **T — Tampering**              | 13    | TH02, TH04, TH07, TH16, TH17, TH19, TH22, TH24, TH29, TH32, TH34, TH35, TH36, TH38 |
+| **R — Repudiation**            | 3     | TH18, TH21, TH38                                                                   |
+| **I — Information Disclosure** | 9     | TH03, TH11, TH15, TH20, TH23, TH25, TH26, TH28, TH37                               |
 | **D — Denial of Service**      | 3     | TH06, TH12, TH30                                                                   |
 | **E — Elevation of Privilege** | 5     | TH05, TH10, TH27, TH29, TH33                                                       |
 
-> Algunas amenazas cubren múltiples categorías STRIDE (ej. TH29 es T + E, TH33 es E + I, TH40 es T + R).
+> Algunas amenazas cubren múltiples categorías STRIDE (ej. TH29 es T + E, TH33 es E + I, TH38 es T + R).
 
 ---
 
