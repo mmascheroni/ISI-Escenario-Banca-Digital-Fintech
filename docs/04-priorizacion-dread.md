@@ -96,9 +96,9 @@ DREAD es un modelo cuantitativo de priorización de riesgos. Asigna un puntaje n
 
 | Prioridad | ID   | Score   | Amenaza                          | Por qué es crítica                                                                                                                |
 | --------- | ---- | ------- | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| **#1**    | TH39 | **9.8** | Credenciales hardcodeadas en Git | Daño máximo, reproducible en minutos, bots automatizados la descubren solos. Un solo commit expone toda la infraestructura cloud. |
+| **#1** | TH37 | **9.8** | Credenciales hardcodeadas en Git| Daño máximo, reproducible en minutos, bots automatizados la descubren solos. Un solo commit expone toda la infraestructura cloud. |
 
-> Solo TH39 alcanza el umbral CRÍTICO (≥ 9.0) según la escala de Microsoft. TH08 y TH09, aunque de altísima prioridad, quedan en ALTO (8.8 y 8.4 respectivamente) y deben remediarse en la misma semana.
+> Solo TH37 alcanza el umbral CRÍTICO (≥ 9.0) según la escala de Microsoft. TH08 y TH09, aunque de altísima prioridad, quedan en ALTO (8.8 y 8.4 respectivamente) y deben remediarse en la misma semana.
 
 ---
 
@@ -139,7 +139,7 @@ DREAD es un modelo cuantitativo de priorización de riesgos. Asigna un puntaje n
 | **#25**   | TH15 | **6.0** | JWT con expiración excesiva                 |
 | **#26**   | TH19 | **6.4** | Manipulación del score crediticio           |
 | **#27**   | TH22 | **6.4** | Manipulación de órdenes de inversión        |
-| **#28**   | TH40 | **5.8** | Borrado de logs de auditoría                |
+| **#28**   | TH38 | **5.8** | Borrado de logs de auditoría                |
 | **#29**   | TH17 | **5.8** | Manipulación de límites de transferencia    |
 | **#30**   | TH02 | **5.8** | Manipulación de parámetros via MitM         |
 | **#31**   | TH04 | **5.8** | Reverse engineering APK/IPA                 |
@@ -160,9 +160,9 @@ DREAD es un modelo cuantitativo de priorización de riesgos. Asigna un puntaje n
 
 ---
 
-## 5.4 Análisis Detallado de las 3 Amenazas Críticas
+## 5.4 Análisis Detallado de las Amenazas Prioritarias
 
-### #1 — TH39: Credenciales hardcodeadas en Git (Score: 49/50)
+### #1 — TH37: Credenciales hardcodeadas en Git (Score: 49/50)
 
 | Criterio             | Puntaje      | Justificación                                                                                                                                 |
 | -------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
