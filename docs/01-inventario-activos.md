@@ -135,7 +135,7 @@
 | T22 | Integración bureau de crédito (Veraz / Nosis)        | Servicio externo | **Alta**   | Consulta de scoring externo para préstamos. Datos confidenciales del usuario.                 |
 | T23 | Integración administradoras de fondos                | Servicio externo | **Alta**   | Suscripción/rescate de cuotapartes. API REST con certificado cliente.                         |
 | T24 | Proveedor SMS / OTP (Twilio / similar)               | Servicio externo | **Media**  | Envío de códigos MFA y alertas de seguridad. Vulnerable a SIM swapping si es el único factor. |
-| T25 | Servicio de validación de identidad KYC (RENAPER)    | Servicio externo | **Alta**   | Validación biométrica durante onboarding. Compara selfie con foto de DNI y consulta RENAPER.  |
+| T25 | Servicio de validación de identidad KYC DNIC         | Servicio externo | **Alta**   | Validación biométrica durante onboarding. Verificacion de de identidad por DNIC               |
 
 ### Grupo T5 — Infraestructura y DevSecOps
 
