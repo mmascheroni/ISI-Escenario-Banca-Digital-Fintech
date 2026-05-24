@@ -1,4 +1,4 @@
-# 06 — Plan de Mitigación y Matriz de Controles de Seguridad
+# 05 — Plan de Mitigación y Matriz de Controles de Seguridad
 
 ```
 ╔══════════════════════════════════════════════════════════════════╗
@@ -410,14 +410,14 @@ Cada control se asigna siguiendo la prioridad DREAD. Los controles se clasifican
 
 #### C21 · TH35 — Manipulación de transferencia interbancaria en tránsito (Score: 6.6)
 
-**Controles:** mTLS con certificados mutuos en la integración con COELSA/LINK; validación de firma de cada instrucción de transferencia; re-confirmación del CBU destino antes de ejecutar.
+**Controles:** mTLS con certificados mutuos en la integración con red interbancaria nacional; validación de firma de cada instrucción de transferencia; re-confirmación del CBU destino antes de ejecutar.
 **NIST:** SC-8, SC-12 | **ISO:** A.13.2.3 | **Estado:** ⏳ Pendiente
 
 ---
 
 #### C22 · TH19 — Manipulación del score crediticio en tránsito (Score: 6.4)
 
-**Controles:** mTLS en la comunicación con el bureau de crédito (Veraz/Nosis); validar checksum de la respuesta antes de usar el score; logging inmutable de cada consulta de scoring.
+**Controles:** mTLS en la comunicación con el bureau de crédito (Clearing / Equifax Uruguay); validar checksum de la respuesta antes de usar el score; logging inmutable de cada consulta de scoring.
 **NIST:** SC-8, AU-2 | **ISO:** A.13.2.3 | **Estado:** ⏳ Pendiente
 
 ---
