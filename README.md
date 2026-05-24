@@ -61,7 +61,7 @@ diagrams/
 prompts/
 ├── 00-memory-bank.md
 └── 01-diagrama_arquitectura.md
-
+```
 ---
 
 ## Herramientas utilizadas
