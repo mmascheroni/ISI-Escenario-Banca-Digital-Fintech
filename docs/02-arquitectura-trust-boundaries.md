@@ -2,8 +2,8 @@
 
 ```
 ╔══════════════════════════════════════════════════════════════════╗
-║        ANÁLISIS DE RIESGOS — FINTECH BANKING DIGITAL             ║
-║        Sección 3: Arquitectura del Sistema                       ║
+║        ANÁLISIS DE RIESGOS — FINTECH BANKING DIGITAL            ║
+║        Sección 3: Arquitectura del Sistema                      ║
 ╚══════════════════════════════════════════════════════════════════╝
 ```
 
@@ -27,7 +27,7 @@ La arquitectura se divide en **5 zonas** separadas por Trust Boundaries:
 | **Zona 2** — API Gateway                    | Autenticación y enrutamiento, zona semipública        | 🔸 Bajo            |
 | **Zona 3** — Microservicios (VPC privada)   | Lógica de negocio, comunicación interna mTLS          | 🔶 Medio           |
 | **Zona 4** — Capa de datos                  | Bases de datos y almacenamiento, máxima restricción   | 🔒 Alto            |
-| **Zona 5** — Integraciones externas         | Terceros de confianza contractual (pagos, BCRA, KYC)  | 🔸 Bajo-Medio      |
+| **Zona 5** — Integraciones externas         | Terceros de confianza contractual (pagos, BCU, KYC)   | 🔸 Bajo-Medio      |
 
 ---
 
@@ -40,7 +40,7 @@ La arquitectura se divide en **5 zonas** separadas por Trust Boundaries:
 ║   ┌──────────────┐    ┌──────────────┐    ┌─────────────────┐                    ║
 ║   │  Usuario     │    │  Atacante    │    │  Servicios      │                    ║
 ║   │  Final       │    │  Externo     │    │  Externos       │                    ║
-║   │  📱 iOS/And  │    │  💀          │    │  (Pagos/BCRA)   │                    ║
+║   │  📱 iOS/And  │    │  💀          │    │  (Pagos/BCU)   │                    ║
 ║   └──────┬───────┘    └──────┬───────┘    └────────┬────────┘                    ║
 ║          │ HTTPS/TLS 1.3     │ (bloqueado)          │ HTTPS+mTLS                  ║
 ╚══════════╪═══════════════════╪══════════════════════╪════════════════════════════╝
@@ -100,7 +100,7 @@ La arquitectura se divide en **5 zonas** separadas por Trust Boundaries:
 ║  │  └────────┬────────┘            │              └───────────┬────────────┘   │  ║
 ║  │           │                     │                          │                │  ║
 ║  │  ┌────────▼────────┐   ┌────────▼─────────┐   ┌──────────▼────────────┐   │  ║
-║  │  │ Prestamo Service    │   │ Investment Svc    │   │ Payment Service        │   │  ║
+║  │  │ Loan Service    │   │ Investment Svc    │   │ Payment Service        │   │  ║
 ║  │  │ (T11)           │   │ (T12)             │   │ (T13)                  │   │  ║
 ║  │  │ · Scoring       │   │ · Suscripción     │   │ · Adhesión servicios   │   │  ║
 ║  │  │ · Aprobación    │   │ · Rescate fondos  │   │ · Pago y comprobante   │   │  ║
@@ -137,7 +137,7 @@ La arquitectura se divide en **5 zonas** separadas por Trust Boundaries:
 ║                                                                                  ║
 ║  ┌─────────────────┐  ┌─────────────────┐  ┌──────────────┐  ┌──────────────┐  ║
 ║  │ Pasarela Pagos  │  │ Red Interbancaria│  │ Bureau       │  │ KYC          │  ║
-║  │ PCI-DSS (T20)   │  │ COELSA/LINK(T21)│  │ Crédito(T22) │  │ RENAPER(T25) │  ║
+║  │ PCI-DSS (T20)   │  │ SIIF/LINK(T21)│  │ Crédito(T22) │  │  DNIC(T25) │  ║
 ║  │ · Solo tokens   │  │ · mTLS mutual   │  │ · Scoring    │  │ · Biometría  │  ║
 ║  │ · HMAC-SHA256   │  │ · SLA crítico   │  │ externo      │  │ · DNI valid. │  ║
 ║  └─────────────────┘  └─────────────────┘  └──────────────┘  └──────────────┘  ║
@@ -217,7 +217,7 @@ Datos en reposo (servidor): PostgreSQL cifrado + Redis (tokens)
     │                       │
     │              ┌────────▼──────────────────────┐
     │              │  Red Interbancaria (T21)       │  ← Si es otro banco
-    │              │  COELSA / LINK (si aplica)     │
+    │              │  SIIF / LINK (si aplica)     │
     │              └────────┬──────────────────────┘
     │                       │
     │              ┌────────▼──────────────────────┐
@@ -239,13 +239,13 @@ Trust Boundaries cruzados: TB1 → TB2 → TB3 → TB4 → TB5
     ├─[1]─ Usuario completa formulario de solicitud
     │       (monto, plazo, destino del préstamo)
     │
-    ├─[2]─ HTTPS POST /prestamos/apply  {JWT}
-    │       ──► API Gateway ──► Prestamo Service (T11)
+    ├─[2]─ HTTPS POST /loans/apply  {JWT}
+    │       ──► API Gateway ──► Loan Service (T11)
     │                               │
     │                    ┌──────────▼──────────────────────┐
-    │                    │  Prestamo Service                    │
+    │                    │  Loan Service                    │
     │                    │  [a] Consulta historial interno  │ ← PostgreSQL
-    │                    │  [b] Consulta bureau crédito     │ ← T22 (Veraz/Nosis)
+    │                    │  [b] Consulta bureau crédito     │ ← T22 (EQUIFAX Uruguay / Clearing)
     │                    │  [c] Calcula scoring propio      │
     │                    │  [d] Calcula capacidad de pago   │
     │                    │  [e] Aprueba / rechaza / escala  │
@@ -347,7 +347,7 @@ Activos involucrados: A17, A18, A20, T12, T23
 | **Equipo de riesgo / fraude** | Analistas que revisan transacciones sospechosas    | Medio — acotado     | Datos de transacciones y alertas     | A06, A08, A24, A25          |
 | **Pasarela de pagos**         | Servicio externo PCI-DSS                           | Medio — contractual | Solo datos de pago tokenizados       | A07 (token)                 |
 | **Administradora de fondos**  | Servicio externo regulado                          | Medio — contractual | Órdenes de suscripción/rescate       | A17, A18                    |
-| **Bureau de crédito**         | Servicio externo (Veraz/Nosis)                     | Bajo — contractual  | Solo consultas de scoring            | A13                         |
+| **Bureau de crédito**         | Servicio externo (EQUIFAX Uruguay / Clearing)      | Bajo — contractual  | Solo consultas de scoring            | A13                         |
 | **Atacante externo**          | Actor malicioso sin acceso legítimo                | ❌ Ninguno          | Evaluado en STRIDE                   | Intenta acceder a todo      |
 | **Insider malicioso**         | Empleado con acceso legítimo que actúa con malicia | ⚠️ Variable         | Según rol + accesos auditados        | Según área                  |
 
