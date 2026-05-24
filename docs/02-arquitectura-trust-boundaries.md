@@ -80,7 +80,7 @@ La arquitectura se divide en **5 zonas** separadas por Trust Boundaries:
 ║   │  · Rate limiting por usuario y por endpoint                  │                ║
 ║   │  · Enrutamiento a microservicios                             │                ║
 ║   │  · Logging de todas las requests entrantes                   │                ║
-║   │  · Rechazo explícito de alg:none en JWT                     │                ║
+║   │  · Validación estricta de JWT prevista mediante RS256        │                ║
 ║   └──────────────────────┬───────────────────────────────────────┘                ║
 ╚══════════════════════════╪════════════════════════════════════════════════════════╝
                            │ mTLS (certificados mutuos entre servicios)
@@ -94,7 +94,7 @@ La arquitectura se divide en **5 zonas** separadas por Trust Boundaries:
 ║  │  │ Auth Service    │   │ Account Service  │   │ Transfer Service       │   │  ║
 ║  │  │ (T08)           │   │ (T09)            │   │ (T10)                  │   │  ║
 ║  │  │ · OAuth 2.0     │   │ · Consulta saldo │   │ · Validación fondos    │   │  ║
-║  │  │ · JWT emisión   │   │ · Movimientos    │   │ · Lock pesimista DB    │   │  ║
+║  │  │ · JWT emisión   │   │ · Movimientos    │   │ · Estrategia de control concurrente en transferencias    │   │  ║
 ║  │  │ · MFA / TOTP    │   │ · Límites cuenta │   │ · Antifraude           │   │  ║
 ║  │  │ · Blacklist     │   └────────┬─────────┘   │ · Idempotency keys     │   │  ║
 ║  │  └────────┬────────┘            │              └───────────┬────────────┘   │  ║
@@ -361,7 +361,7 @@ Activos involucrados: A17, A18, A20, T12, T23
 | **TB-2** | API Gateway            | Entre perímetro y microservicios              | Validación JWT (RS256), rate limiting por usuario/endpoint, rechazo alg:none, logging completo             | Todos los datos de negocio |
 | **TB-3** | VPC privada            | Entre API Gateway y microservicios            | mTLS entre servicios, Network Policies, no exposición directa a internet, service mesh                     | A01–A30, T08–T15           |
 | **TB-4** | Capa de datos          | Entre microservicios y bases de datos         | Credenciales desde Vault, TLS en conexión BD, mínimo privilegio por servicio, solo acceso desde subred app | A03–A30, T16–T19           |
-| **TB-5** | Integraciones externas | Entre backend e integraciones de terceros     | mTLS mutual, validación HMAC en webhooks, IP whitelist, timeout y circuit breaker                          | A07–A09, A12–A23           |
+| **TB-5** | Integraciones externas | Entre backend e integraciones de terceros     | mTLS mutual, validación criptográfica de webhooks, IP whitelist, timeout y circuit breaker                          | A07–A09, A12–A23           |
 | **TB-6** | Dispositivo móvil      | Entre el dispositivo del usuario y el backend | Certificate pinning, biometría local, Keychain/Keystore, root detection, código ofuscado                   | A03, A04, A07              |
 
 ---
