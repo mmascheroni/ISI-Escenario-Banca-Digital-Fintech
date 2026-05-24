@@ -131,7 +131,7 @@
 | ID  | Activo                                               | Tipo             | Criticidad | Descripción                                                                                   |
 | --- | ---------------------------------------------------- | ---------------- | ---------- | --------------------------------------------------------------------------------------------- |
 | T20 | Pasarela de pagos externa (PCI-DSS Level 1)          | Servicio externo | **Alta**   | Procesamiento de pagos con tarjeta. Solo recibe tokens. Comunicación HTTPS + HMAC-SHA256.     |
-| T21 | Integración red interbancaria (COELSA / LINK / BCRA) | Servicio externo | **Alta**   | Ejecución de transferencias CBU interbancarias. SLA crítico. Certificados mutuos (mTLS).      |
+| T21 | Integración red interbancaria (Red bancaria nacional/interbancaria / LINK / BCU) | Servicio externo | **Alta**   | Ejecución de transferencias CBU interbancarias. SLA crítico. Certificados mutuos (mTLS).      |
 | T22 | Integración bureau de crédito (Veraz / Nosis)        | Servicio externo | **Alta**   | Consulta de scoring externo para préstamos. Datos confidenciales del usuario.                 |
 | T23 | Integración administradoras de fondos                | Servicio externo | **Alta**   | Suscripción/rescate de cuotapartes. API REST con certificado cliente.                         |
 | T24 | Proveedor SMS / OTP (Twilio / similar)               | Servicio externo | **Media**  | Envío de códigos MFA y alertas de seguridad. Vulnerable a SIM swapping si es el único factor. |

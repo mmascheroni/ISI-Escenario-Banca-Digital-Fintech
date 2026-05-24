@@ -1,9 +1,3 @@
-# Registro de Prompts Utilizados
-
-Este documento recopila los prompts utilizados como apoyo para:
-- generación de diagramas
-
-
 ## Prompt — Mejora visual del diagrama de arquitectura
 
 Tomar como base un diagrama de arquitectura fintech ya realizado manualmente y mejorarlo visualmente para una presentación universitaria de threat modeling.
