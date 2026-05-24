@@ -1,12 +1,8 @@
 # Registro de Prompts Utilizados
 
 Este documento recopila los prompts utilizados como apoyo para:
-- refinamiento visual,
-- estructuración de documentación,
-- generación de diagramas,
-- mejora de redacción técnica.
+- generación de diagramas
 
-La arquitectura, amenazas y decisiones de seguridad fueron definidas manualmente por el equipo y luego refinadas con asistencia de IA.
 
 ## Prompt — Mejora visual del diagrama de arquitectura
 
